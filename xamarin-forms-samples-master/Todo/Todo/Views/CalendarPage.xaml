@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:schedule="clr-namespace:Syncfusion.SfSchedule.XForms;assembly=Syncfusion.SfSchedule.XForms"
+             x:Class="Todo.Views.CalendarPage"
+             xmlns:samplelocal="clr-namespace:Todo" 
+             xmlns:Todo="clr-namespace:Todo.Views">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="+" Clicked="OnApptAdded">
+            <ToolbarItem.IconImageSource>
+                <OnPlatform x:TypeArguments="ImageSource">
+                    <On Platform="Android, UWP" Value="plus.png" />
+                </OnPlatform>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <Grid>
+        <schedule:SfSchedule
+            x:Name="Schedule"
+            ScheduleView="WeekView"
+            ShowAppointmentsInline="True"
+            VerticalOptions="FillAndExpand"
+            DataSource="{Binding ListOfMeeting}">
+            <schedule:SfSchedule.WorkWeekViewSettings>
+                <schedule:WorkWeekViewSettings WorkEndHour="16" WorkStartHour="8" />
+            </schedule:SfSchedule.WorkWeekViewSettings>
+            <schedule:SfSchedule.AppointmentMapping>
+                <schedule:ScheduleAppointmentMapping
+                    ColorMapping="Color"
+                    EndTimeMapping="To"
+                    IsAllDayMapping="IsAllDay"
+                    StartTimeMapping="From"
+                    SubjectMapping="EventName"
+                    MinHeightMapping="MinimumHeight"
+                    StartTimeZoneMapping="StartTimeZone"
+                    EndTimeZoneMapping="EndTimeZone"/>
+            </schedule:SfSchedule.AppointmentMapping>
+            <schedule:SfSchedule.BindingContext>
+                <Todo:CalendarPageCS />
+            </schedule:SfSchedule.BindingContext>
+        </schedule:SfSchedule>
+        <ListView
+            x:Name="scheduleview_list"             
+            BackgroundColor="White"           
+            HasUnevenRows="False"
+            HorizontalOptions="Start"
+            ItemsSource="{Binding ScheduleTypeCollection}"
+            RowHeight="45"
+            SelectedItem="0"
+            SeparatorVisibility="None"
+            VerticalOptions="Start"
+            WidthRequest="200"
+            ItemSelected="OnListItemSelected">
+            <ListView.BindingContext>
+                <Todo:CalendarPageCS />
+            </ListView.BindingContext>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid>
+                            <Grid Margin="20,10,0,0">
+                                <Label Text="{Binding ScheduleType}" TextColor="Black" />
+                            </Grid>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</ContentPage>

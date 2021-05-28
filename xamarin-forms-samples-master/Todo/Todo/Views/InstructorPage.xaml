@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Todo.Views.InstructorPage">
+    <StackLayout Margin="20" VerticalOptions="StartAndExpand">
+        <Label Text="Name" />
+        <Entry Text="{Binding Name}" MaxLength="21" x:Name="name"/>
+        <Label Text="Telephone" />
+        <Entry Text="{Binding Telephone}" Keyboard="Telephone" x:Name="Telephone"/>
+        <Label Text="Password" />
+        <Entry Text="{Binding Password}"  IsPassword="True" x:Name="password"/>
+        <Button Text="Save" Clicked="OnSaveClicked" />
+        <Button Text="Delete" Clicked="OnDeleteClicked" />
+        <Button Text="Cancel" Clicked="OnCancelClicked" />
+    </StackLayout>
+</ContentPage>
